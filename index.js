@@ -19,7 +19,7 @@ module.exports = function (options) {
     options = options ? lib.extend(defaultOptions, options, true) : defaultOptions;
     think.app.once('appReady', () => {
         think._caches.configs.lang = new think.loader(options.language_path, {root: '', prefix: ''}) || {};
-        lib.define(think, 'lang', function(name) {
+        lib.define(think, 'i18n', function(name) {
             let lang = think.config(options.language, 'lang');
             if (name === undefined) {
                 return lang;

@@ -37,3 +37,9 @@ config: { //中间件配置
     }
 }
 ```
+
+3、使用
+
+```js
+let location = think.i18n('test');
+```
