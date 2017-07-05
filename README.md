@@ -2,7 +2,7 @@
 -----
 
 [![npm version](https://badge.fury.io/js/think_i18n.svg)](https://badge.fury.io/js/think_i18n)
-[![Dependency Status](https://david-dm.org/richenlin/think_i18n.svg)](https://david-dm.org/richenlin/think_i18n)
+[![Dependency Status](https://david-dm.org/thinkkoa/think_i18n.svg)](https://david-dm.org/thinkkoa/think_i18n)
 
 Internationalization and localization for ThinkKoa.
 
