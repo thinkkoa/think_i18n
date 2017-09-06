@@ -1,6 +1,6 @@
 {
   "name": "think_i18n",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "description": "Internationalization and localization for ThinkKoa.",
   "main": "index.js",
   "scripts": {

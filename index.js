@@ -24,6 +24,7 @@ module.exports = function (options) {
             if (name === undefined) {
                 return lang;
             }
+            name = lib.toString(name);
             if (name.indexOf('.') > -1) {
                 let keys = name.split('.');
                 return lang[keys[0]] ? (lang[keys[0]][keys[1]] || '') : '';
@@ -35,12 +36,15 @@ module.exports = function (options) {
     return function (ctx, next) {
         if (options.lang_pathname) {
             let pathname = ctx.path.split('/');
-            if (pathname[0] && (pathname[0] in think._caches._lang)){
+            if (ctx.path.indexOf('/') === 0) {
+                pathname.shift();
+            }
+            if (pathname[0] && (pathname[0] in think._caches.configs.lang)){
                 options.language = pathname[0];
                 pathname.shift();
                 ctx.path = pathname.join('/');
             }
         }
-        return ctx.next();
+        return next();
     };
 };
