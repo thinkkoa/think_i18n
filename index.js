@@ -15,9 +15,10 @@ const defaultOptions = {
     language_path: think.app_path + '/i18n', //多语言配置文件目录
 };
 
-module.exports = function (options) {
+module.exports = function (options, app) {
     options = options ? lib.extend(defaultOptions, options, true) : defaultOptions;
-    think.app.once('appReady', () => {
+    let koa = global.think ? (think.app || {}) : (app.koa || {});
+    koa.once('appReady', () => {
         think._caches.configs.lang = new think.loader(options.language_path, {root: '', prefix: ''}) || {};
         lib.define(think, 'i18n', function(name) {
             let lang = think.config(options.language, 'lang');
