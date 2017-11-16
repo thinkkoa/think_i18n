@@ -33,7 +33,7 @@ config: { //中间件配置
     i18n: {
         language: 'zh-cn', //默认语言设置 zh-cn en
         lang_pathname: true, //开启多语言解析 /zh-cn/home/index  自动解析为 /home/index使用中文语言
-        language_path: think.app_path + '/i18n', //多语言配置文件目录
+        language_path: process.env.APP_PATH + '/i18n', //多语言配置文件目录
     }
 }
 ```
@@ -41,5 +41,9 @@ config: { //中间件配置
 3、使用
 
 ```js
-let location = think.i18n('test');
+// in controller
+let location = this.app.i18n('test');
+
+// in middleware 
+let location = app.i18n('test');
 ```

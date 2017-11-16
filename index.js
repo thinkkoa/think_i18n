@@ -6,22 +6,22 @@
  * @version    17/7/3
  */
 const lib = require('think_lib');
+const loader = require('think_loader');
 /**
  * default options
  */
 const defaultOptions = {
     language: 'zh-cn', //默认语言设置 zh-cn en
     lang_pathname: true, //开启多语言解析 /zh-cn/home/index  自动解析为 /home/index使用中文语言
-    language_path: think.app_path + '/i18n', //多语言配置文件目录
+    language_path: process.env.APP_PATH + '/i18n', //多语言配置文件目录
 };
 
 module.exports = function (options, app) {
     options = options ? lib.extend(defaultOptions, options, true) : defaultOptions;
-    let koa = global.think ? (think.app || {}) : (app.koa || {});
-    koa.once('appReady', () => {
-        think._caches.configs.lang = new think.loader(options.language_path, {root: '', prefix: ''}) || {};
-        lib.define(think, 'i18n', function(name) {
-            let lang = think.config(options.language, 'lang');
+    app.once('appReady', () => {
+        app.configs.lang = loader(options.language_path, {root: '', prefix: ''}) || {};
+        lib.define(app, 'i18n', function(name) {
+            let lang = app.config(options.language, 'lang');
             if (name === undefined) {
                 return lang;
             }
@@ -40,7 +40,7 @@ module.exports = function (options, app) {
             if (ctx.path.indexOf('/') === 0) {
                 pathname.shift();
             }
-            if (pathname[0] && (pathname[0] in think._caches.configs.lang)){
+            if (pathname[0] && (pathname[0] in app.configs.lang)){
                 options.language = pathname[0];
                 pathname.shift();
                 ctx.path = pathname.join('/');
